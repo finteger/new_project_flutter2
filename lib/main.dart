@@ -1,35 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:new_project_flutter2/screens/my_home_page.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
-  final String name = 'Todd';
 
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(color: Colors.blue),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Image(
-                image: AssetImage("assets/images/tree.jpg"),
-              ),
-              Center(
-                child: Text(
-                  '$name',
-                  style: TextStyle(color: Colors.red, fontSize: 22),
-                ),
-              ),
-            ],
-          ),
-        ),
+      title: 'My First App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const MyHomePage(),
     );
   }
 }
