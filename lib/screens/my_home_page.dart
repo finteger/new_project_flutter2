@@ -8,6 +8,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> imageList = [
+    Image.asset('assets/images/bark.jpg'),
+    Image.asset('assets/images/cat.jpg'),
+    Image.asset('assets/images/city.png'),
+    Image.asset('assets/images/hippo.jpg'),
+    Image.asset('assets/images/iceland.jpg'),
+    Image.asset('assets/images/jellyfish.jpg'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,33 +41,35 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       drawer: Drawer(),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.blue,
-          image: DecorationImage(
-            image: AssetImage('assets/images/tree.jpg'),
-            scale: 0.1,
-            alignment: Alignment.topCenter,
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: List.generate(6, (index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(height: 200, child: imageList[index]),
+              ],
+            );
+          }),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(
-            backgroundColor: Colors.green,
-            icon: Icon(Icons.home),
-            label: 'Home'),
+            backgroundColor: Colors.red, icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(
-            backgroundColor: Colors.green,
-            icon: Icon(Icons.home),
-            label: 'Home'),
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.search),
+            label: 'Search'),
         BottomNavigationBarItem(
-            backgroundColor: Colors.green,
-            icon: Icon(Icons.home),
-            label: 'Home'),
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.settings),
+            label: 'Settings'),
         BottomNavigationBarItem(
-            backgroundColor: Colors.green,
-            icon: Icon(Icons.home),
-            label: 'Home'),
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.person),
+            label: 'Profile'),
       ]),
     );
   }
