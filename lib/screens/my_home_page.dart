@@ -8,17 +8,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Widget> imageList = [
-    Image.asset('assets/images/bark.jpg'),
-    Image.asset('assets/images/cat.jpg'),
-    Image.asset('assets/images/city.png'),
-    Image.asset('assets/images/hippo.jpg'),
-    Image.asset('assets/images/iceland.jpg'),
-    Image.asset('assets/images/jellyfish.jpg'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<String> imageList = [
+      'assets/images/bark.jpg',
+      'assets/images/cat.jpg',
+      'assets/images/city.png',
+      'assets/images/hippo.jpg',
+      'assets/images/iceland.jpg',
+      'assets/images/jellyfish.jpg'
+    ];
+
+    List<String> imageTitle = [
+      'tree',
+      'cat',
+      'city',
+      'hippo',
+      'iceland',
+      'jellyfish'
+    ];
+
+    double Width = MediaQuery.of(context).size.width;
+    double Height = MediaQuery.of(context).size.height;
+
+    List<Widget> gridStuff = List.generate(6, (index) {
+      return Container(
+        width: Width,
+        height: Height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          image: DecorationImage(
+            image: AssetImage(imageList[index]),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            imageTitle[index],
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 42,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  blurRadius: 5,
+                  color: Colors.black.withOpacity(0.5),
+                  offset: Offset(5, 5),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -41,21 +84,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       drawer: Drawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(6, (index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(height: 200, child: imageList[index]),
-              ],
-            );
-          }),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.red,
         ),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 240,
+            ),
+            itemCount: gridStuff.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                children: [
+                  Container(height: 240, child: gridStuff[index]),
+                ],
+              );
+            }),
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
+      bottomNavigationBar:
+          BottomNavigationBar(showUnselectedLabels: true, items: const [
         BottomNavigationBarItem(
             backgroundColor: Colors.red, icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(
