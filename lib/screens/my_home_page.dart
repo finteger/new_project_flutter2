@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -75,8 +75,25 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               width: 120,
             ),
-            ElevatedButton(
-              onPressed: null,
+            TextButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Alert'),
+                        content: Text('This is an alert dialog.'),
+                        actions: [
+                          TextButton(
+                            child: Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    });
+              },
               child: Icon(Icons.notification_add, color: Colors.white),
             ),
             Icon(Icons.settings),
